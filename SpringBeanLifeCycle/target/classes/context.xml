@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- <bean id="Lifecycle" class="com.zensar.bean.LifeCycleBean" init-method="myInit">
+		<property name="title" value="Gaurav"></property>
+</bean> -->
+
+<!-- p namespace usage -->
+<!-- p:title-ref : if item is of secondary datatype  -->
+<bean id="Lifecycle" class="com.zensar.bean.LifeCycleBean" init-method="myInit" p:title="Gaurav">
+</bean> 
+
+<!-- c namespace usage - CONSTRUCTOR -->
+<!-- c:title-ref : if item is of secondary datatype  -->
+<bean id="Lifecycle2" class="com.zensar.bean.LifeCycleBean" init-method="myInit" c:title="Gaurav" >
+</bean> 
+
+
+<bean class="com.zensar.bean.MyBeanPostProcessor"></bean>
+</beans>

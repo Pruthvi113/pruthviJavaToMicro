@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	>
+     <context:annotation-config/>
+
+<!-- Assignment 1 : Order Total START -->
+<bean id="item1" class="com.zensar.beans.Item" >
+	<property name="name" value="Acer Laptop"></property>
+	<property name="price" value="25000.00"></property>
+</bean>
+	
+<bean id="item2" class="com.zensar.beans.Item" >
+	<property name="name" value="Dell Laptop"></property>
+	<property name="price" value="35000.00"></property>
+</bean>
+
+ <bean id="item3" class="com.zensar.beans.Item" >
+	<property name="name" value="HP Laptop"></property>
+	<property name="price" value="40000.00"></property>
+</bean> 
+
+<bean id="order1" class="com.zensar.beans.Order"> 
+	<property name="title" value="Acer Laptops Order"></property>
+	<property name="item" ref="item1"></property>
+</bean>
+
+<bean id="order2" class="com.zensar.beans.Order"> 
+	<property name="title" value="Dell Laptops Order"></property>
+	<property name="item" ref="item2"></property>
+</bean>
+
+<bean id="order3" class="com.zensar.beans.Order"> 
+	<property name="title" value="HP Laptops Order"></property>
+	<property name="item" ref="item3"></property>
+</bean>
+<!-- Assignment 1 : Order Total END -->
+
+<!-- Assignment 2 : Auto-wiring Employee and Department START -->
+ <bean id="department" class="com.zensar.beans.Department" >
+	<property name="name" value="Consumer Services"></property>
+	<property name="head" value="Samir Gosavi"></property>
+</bean> 
+
+	<!-- autowire="byName"  -->
+ <bean id="employee" class="com.zensar.beans.Employee" autowire="byName">
+	<property name="name" value="Gaurav Jethawa"></property>
+	<property name="id" value="51554"></property>
+</bean> 
+
+	<!-- autowire="byType"  -->
+ <bean id="employee2" class="com.zensar.beans.Employee" autowire="byType">
+	<property name="name" value="Girish Deshmukh"></property>
+	<property name="id" value="23123"></property>
+</bean> 
+
+	<!-- autowire="constructor"  -->
+ <bean id="employee3" class="com.zensar.beans.Employee" autowire="constructor">
+	<property name="name" value="Sandesh Srinath"></property>
+	<property name="id" value="60123"></property>
+</bean> 
+
+	<!-- autowire by ANNOTATION  -->
+ <bean id="departmentA1" class="com.zensar.beans.DepartmentA" >
+	<property name="name" value="Application Services"></property>
+	<property name="head" value="Sanjay Gupta"></property>
+</bean>
+<bean id="departmentA2" class="com.zensar.beans.DepartmentA" >
+	<property name="name" value="Cloud Services"></property>
+	<property name="head" value="Jennifer Lopez"></property>
+</bean>  
+<bean id="employeeA" class="com.zensar.beans.EmployeeA" >
+	<property name="name" value="Chetan Patil"></property>
+	<property name="id" value="41521"></property>
+</bean> 
+<!-- Assignment 2 : Auto-wiring Employee and Department END -->
+
+</beans>

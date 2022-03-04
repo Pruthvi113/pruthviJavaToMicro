@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="item" class="com.zensar.Item">
+	<property name="name">
+		<value>Laptop</value><!-- or another way below for setting value -->
+	</property>
+	<property name="price" value="25000.00"></property>
+</bean>
+<bean id="item2" class="com.zensar.Item" >
+	<property name="name">
+		<value>Mobile</value>
+	</property>
+	<property name="price" value="15000.00"></property>
+</bean>
+<bean id="order" class="com.zensar.Order" lazy-init="true"> 
+<!-- lazy-init  - if true, the object will be created only if it is invoked from class  class has this context.getBean("order", Order.class) -->
+	<property name="title" value="Purchase Laptops"></property>
+	<property name="item" ref="item"></property> <!--  ref : referring to another bean -->
+</bean>
+
+<!-- INNER BEAN CONCEPT -->
+<bean id="order3" class="com.zensar.Order" lazy-init="true" abstract="true">  <!--  object instance cannot be created if abstract="true" -->
+	<property name="title" value="Purchase Inner Bean"></property>
+	<property name="item">
+		<bean id="item2" class="com.zensar.Item" >
+	<property name="name">
+		<value>Inner Bean Item</value>
+	</property>
+	<property name="price" value="15000.00"></property>
+</bean>
+	</property> 
+</bean>
+
+<bean id="newOrder"  class="com.zensar.Order" parent="order3"></bean> <!-- bean inheritance, properties can be over-riden here as well	 -->
+
+<bean id="order2" class="com.zensar.Order" init-method="orderInit" destroy-method="orderDestroy" scope="singleton"> 
+<!-- call hierarchy contructor > setter > init | destroy method needs -context.registerShutdownHook(); -->
+<!--  ######### contructor based injection :  will call constructor instead of setters -->
+	<constructor-arg> 
+	 <ref bean="item"/>
+	</constructor-arg>
+	 
+	<constructor-arg type="java.lang.String" index="1"><!-- type and index are optional - TO REMOVE AMBIGUITY -->
+	<value> Desktop </value>
+	 </constructor-arg>
+</bean>
+</beans>

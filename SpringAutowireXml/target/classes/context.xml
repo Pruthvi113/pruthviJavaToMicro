@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	>
+     <context:annotation-config/>
+
+	
+<bean id="item" class="com.zensar.beans.Item" >
+	<property name="name" value="Acer Laptop"></property>
+	<property name="price" value="15000.00"></property>
+</bean>
+<bean id="myItem" class="com.zensar.beans.Item" >
+	<property name="name" value="Dell Laptop"></property>
+	<property name="price" value="25000.00"></property>
+</bean>
+ <bean id="myItem2" class="com.zensar.beans.Item" >
+	<property name="name" value="HP Laptop"></property>
+	<property name="price" value="35000.00"></property>
+</bean> 
+
+<bean id="order" class="com.zensar.beans.Order"> 
+	<!-- autowire="byName" : will look by name : order.class has "myItem" it will search for bean id="myItem" : NOTE  - property item is now removed from order bean below  -->
+	<!-- autowire="byType" : will look for same type : "Item" and will look for class="...Item"  | this will fail if there are 2 beans with same class. check what error is throw | byType will internally use byName if there is more than 1 type-->
+	<!-- autowire="constructor" : will search for constructor - public Order (Item item) | constructor internally makes use of byType only - but this will not throw exception if there is more than 1 bean of same type (like it throws in case of byType)
+			** constructor will search for Constructor > then for byType > then for byName.
+			e.g COntructoe > and it find 2 beans with same type > it will prefer bean with same name (byName). if nothing is found it will show nll, but not throw exeption-->
+	<!-- autowire="default" : No autowiring will happen -->
+	<!-- autowire="no" : No autowiring will happen | same as default-->
+	<!-- is autowiring is defined at both places - xml and class - precedence is given to class -->
+	<!-- can be specidied at top as well <beans> - default-autowire="byName" -->
+	<property name="title" value="Purchase Laptops"></property>
+</bean>
+
+
+</beans>

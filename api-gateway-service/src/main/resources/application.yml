@@ -1,0 +1,20 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: GATEWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+      - id: couponService
+        uri: lb://COUPON-SERVICE
+        predicates: Path=/coupons/**
+      - id: productService
+        uri: lb://PRODUCT-SERVICE
+        predicates: Path=/products/**   
+  zipkin:
+    base-url: http://127.0.0.1:9411/
